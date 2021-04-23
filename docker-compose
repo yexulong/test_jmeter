@@ -1,7 +1,7 @@
 version: '2'
 services:
     jmeter:
-      image: 'myjmeter:1.0'
+      build: .
       container_name: 'myjmeter'
       privileged: true
       tty: true
