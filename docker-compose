@@ -1,0 +1,32 @@
+version: '2'
+services:
+    jmeter:
+      image: 'myjmeter:1.0'
+      container_name: 'myjmeter'
+      privileged: true
+      tty: true
+      networks:
+        - jmeter-tier
+    
+    influxdb:
+      image: 'influxdb:1.7.11'
+      container_name: 'influxdb'
+      restart: unless-stopped
+      privileged: true
+      ports:
+        - '8086:8086'
+      networks:
+        - jmeter-tier   
+        
+    grafana:
+      image: 'grafana/grafana:latest'
+      container_name: 'grafana'
+      restart: unless-stopped
+      privileged: true
+      ports:
+        - '3000:3000'
+      networks:
+        - jmeter-tier
+        
+networks:
+    jmeter-tier:
